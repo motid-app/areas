@@ -5,7 +5,7 @@ import { PrismaService } from "../prisma/prisma.service";
 export class CountryService {
   constructor(private prisma: PrismaService) {}
 
-  async countries() {
+  async all() {
     return this.prisma.country.findMany()
   }
 }

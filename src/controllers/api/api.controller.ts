@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { QueryAreasDto } from 'src/dto/area.dto';
 import { AreaService } from '../../services/area/area.service';
 import { CountryService } from '../../services/country/country.service';
 
@@ -11,11 +12,16 @@ export class ApiController {
 
   @Get('countries')
   async getCountries() {
-    return await this.countryService.countries()
+    return await this.countryService.all()
   }
 
   @Get('areas')
-  async getAreas() {
-    return await this.aeraService.areas()
+  async getAreas(@Query() query: QueryAreasDto) {
+    return await this.aeraService.findMany(query)
+  }
+
+  @Get('areas/:id')
+  async getArea(@Param('id', ParseIntPipe) id: number) {
+    return await this.aeraService.findById(id)
   }
 }
