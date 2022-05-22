@@ -1,8 +1,10 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { QueryAreasDto } from 'src/dto/area.dto';
 import { AreaService } from '../../services/area/area.service';
 import { CountryService } from '../../services/country/country.service';
 
+@ApiTags('APIs')
 @Controller('api')
 export class ApiController {
   constructor(
