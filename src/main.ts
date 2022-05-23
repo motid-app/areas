@@ -4,6 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './modules/app.module';
 import { PrismaService } from './services/prisma/prisma.service';
 
+const port = process.env.PORT || 3000;
+
 const validationPipe = new ValidationPipe({
   transform: true
 })
@@ -28,6 +30,6 @@ async function bootstrap() {
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
