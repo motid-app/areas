@@ -1,0 +1,21 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Heroku login
+        run: heroku container:login
+      - name: Build and push new image
+        run: heroku container:push web -a motid-areas
+      - name: Deploy new image
+        run: heroku container:release web -a motid-areas
